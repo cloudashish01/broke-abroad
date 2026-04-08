@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -27,6 +28,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} h-full antialiased`}>
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-J39N5J7XRW" strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-J39N5J7XRW');`}
+        </Script>
+      </head>
       <body className="min-h-full flex flex-col bg-[#0a0a0f]">
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>
