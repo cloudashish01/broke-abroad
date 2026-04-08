@@ -47,3 +47,7 @@ body {
 .blog-content a:hover { color: var(--accent-hover); }
 .blog-content hr { border: none; border-top: 1px solid rgba(212, 168, 83, 0.2); margin: 2rem 0; }
 .blog-content em { color: var(--text-secondary); font-style: italic; }
+.blog-content img {
+  width: 100%; border-radius: 16px; margin: 1.5rem 0;
+  object-fit: cover; max-height: 400px;
+}
