@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a28;
+  --text-primary: #f0f0f0;
+  --text-secondary: #9ca3af;
+  --accent: #d4a853;
+  --accent-hover: #e6be6a;
+  --accent-dim: rgba(212, 168, 83, 0.15);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 4px; }
+
+.blog-content h1 {
+  font-size: 2rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--accent);
+}
+.blog-content h2 {
+  font-size: 1.6rem; font-weight: 700; margin: 2.5rem 0 1rem; color: var(--text-primary);
+  border-bottom: 1px solid rgba(212, 168, 83, 0.3); padding-bottom: 0.5rem;
+}
+.blog-content h3 {
+  font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--accent);
+}
+.blog-content p {
+  line-height: 1.8; margin: 1rem 0; color: var(--text-secondary);
+}
+.blog-content ul, .blog-content ol {
+  margin: 1rem 0; padding-left: 1.5rem; color: var(--text-secondary);
+}
+.blog-content li { margin: 0.5rem 0; line-height: 1.7; }
+.blog-content strong { color: var(--text-primary); font-weight: 600; }
+.blog-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.blog-content a:hover { color: var(--accent-hover); }
+.blog-content hr { border: none; border-top: 1px solid rgba(212, 168, 83, 0.2); margin: 2rem 0; }
+.blog-content em { color: var(--text-secondary); font-style: italic; }
