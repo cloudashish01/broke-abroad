@@ -21,6 +21,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: dest.title,
       description: dest.description,
       type: 'article',
+      url: `https://brokeabroad.com/destinations/${slug}`,
+      images: dest.heroImage ? [{ url: dest.heroImage, width: 1200, height: 627 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: dest.title,
+      description: dest.description,
+      images: dest.heroImage ? [dest.heroImage] : [],
+    },
+    alternates: {
+      canonical: `https://brokeabroad.com/destinations/${slug}`,
     },
   };
 }
@@ -30,8 +41,37 @@ export default async function DestinationPage({ params }: Props) {
   const dest = await getDestination(slug);
   if (!dest) notFound();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: dest.title,
+    description: dest.description,
+    image: dest.heroImage || undefined,
+    datePublished: dest.pubDate,
+    author: {
+      '@type': 'Organization',
+      name: 'Broke Abroad',
+      url: 'https://brokeabroad.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Broke Abroad',
+      url: 'https://brokeabroad.com',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://brokeabroad.com/destinations/${slug}`,
+    },
+  };
+
   return (
     <>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero */}
       <div className="relative h-[50vh] min-h-[400px] flex items-end overflow-hidden">
         <div
